@@ -1,0 +1,14 @@
+services:
+  render:
+    build:
+      context: .
+      args:
+        PANDOC_VERSION: "3.10.1"
+        WEASYPRINT_VERSION: "70.0"
+    working_dir: /work
+    volumes:
+      - type: bind
+        source: ${MARKRENDER_ROOT:-.}
+        target: /work
+    environment:
+      OUTPUT_DIR: /work/_rendered

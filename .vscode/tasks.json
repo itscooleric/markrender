@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Markdown: Render current file (HTML + PDF)",
+      "type": "shell",
+      "command": "docker compose -f \"${workspaceFolder}/compose.yaml\" run --rm render \"${relativeFile}\" both",
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "shared", "clear": true }
+    },
+    {
+      "label": "Markdown: Render current file (PDF only)",
+      "type": "shell",
+      "command": "docker compose -f \"${workspaceFolder}/compose.yaml\" run --rm render \"${relativeFile}\" pdf",
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Markdown: Render all (HTML + PDF)",
+      "type": "shell",
+      "command": "docker compose -f \"${workspaceFolder}/compose.yaml\" run --rm render . both",
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "shared", "clear": true }
+    },
+    {
+      "label": "Markdown: Build renderer image",
+      "type": "shell",
+      "command": "docker compose -f \"${workspaceFolder}/compose.yaml\" build",
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    }
+  ]
+}

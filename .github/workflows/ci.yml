@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate shell script
+        run: bash -n render.sh && bash -n bin/markrender
+
+      - name: Build renderer
+        run: docker compose build
+
+      - name: Render example
+        run: docker compose run --rm render example.md both
+
+      - name: Verify artifacts
+        run: |
+          test -s _rendered/example.html
+          test -s _rendered/example.pdf
